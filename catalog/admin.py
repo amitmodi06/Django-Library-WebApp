@@ -16,6 +16,7 @@ admin.site.register(Language)
 
 class BookInstanceInline(admin.TabularInline):
     model = BookInstance
+    extra = 0
 
 @admin.register(Book)  # this decorator is another way of writing admin.site.register(Book)
 class BookAdmin(admin.ModelAdmin):
