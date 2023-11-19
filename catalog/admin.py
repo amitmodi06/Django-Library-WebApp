@@ -3,23 +3,35 @@ from .models import Book, Author, Genre,  BookInstance, Language
 
 # Register your models here.
 
-# admin.site.register(Book)
+"""Minimal registration of Models.
+admin.site.register(Book)
+admin.site.register(Author)
+admin.site.register(BookInstance)
+admin.site.register(Genre)
+admin.site.register(Language)
+"""
+
+admin.site.register(Genre)
+admin.site.register(Language)
+
+
 @admin.register(Book)  # this decorator is another way of writing admin.site.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'author', 'display_genre')
 
-# admin.site.register(BookInstance)
+
 @admin.register(BookInstance) 
 class BookInstanceAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('book', 'status', 'due_back', 'id')
+    list_filter = ('status', 'due_back')
 
-# admin.site.register(Author)
+
 # Define the admin class
 class AuthorAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('last_name', 'first_name', 'date_of_birth', 'data_of_death')
+
+    fields = ['first_name', 'last_name', ('date_of_birth', 'data_of_death')]
 
 # Register the admin class with the associated model
 admin.site.register(Author, AuthorAdmin)
 
-admin.site.register(Genre)
-admin.site.register(Language)

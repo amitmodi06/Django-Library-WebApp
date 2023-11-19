@@ -45,6 +45,12 @@ class Book(models.Model):
     class Meta:
         ordering = ['title', 'author']
 
+    def display_genre(self):
+        """Create a string for the Genre. This is required to display genre in Admin."""
+        return ', '.join(genre.name for genre in self.genre.all()[:3])
+
+    display_genre.short_description = 'Genre'
+
 
     def get_absolute_url(self):
         """Returns the url to access a particular genre instance."""
