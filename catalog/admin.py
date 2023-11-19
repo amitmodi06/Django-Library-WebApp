@@ -14,10 +14,14 @@ admin.site.register(Language)
 admin.site.register(Genre)
 admin.site.register(Language)
 
+class BookInstanceInline(admin.TabularInline):
+    model = BookInstance
 
 @admin.register(Book)  # this decorator is another way of writing admin.site.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'display_genre')
+
+    inlines = [BookInstanceInline]
 
 
 @admin.register(BookInstance) 
