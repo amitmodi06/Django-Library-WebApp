@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse  # To generate URLS by reversing URL patterns
 import uuid
 
 # Create your models here.
@@ -96,6 +97,10 @@ class BookInstance(models.Model):
     def __str__(self) -> str:
         """String for representing the Model object."""
         return f'{self.id} ({self.book.title})'
+    
+    def get_absolute_url(self):
+        """Returns the url to access a particular book instance."""
+        return reverse("bookinstance-detail", args=[str(self.id)])
 
 
 class Author(models.Model):
