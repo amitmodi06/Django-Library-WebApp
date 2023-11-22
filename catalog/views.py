@@ -36,6 +36,7 @@ def index(request):
 class BookListView(generic.ListView):
     """Generic class-based view for a list of books."""
     model = Book
+    paginate_by = 10
 
 
 class BookDetailView(generic.DetailView):
