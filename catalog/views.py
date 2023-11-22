@@ -43,3 +43,12 @@ class BookDetailView(generic.DetailView):
     """Generic class-based detail view for a book."""
     model = Book
 
+
+class AuthorListView(generic.ListView):
+    """Generic class-based view for a list of authors."""
+    model = Author
+
+
+class AuthorDetailView(generic.DetailView):
+    """Generic class-based detail view for an author."""
+    model = Author
