@@ -8,12 +8,16 @@
   <div style="margin-left:20px;margin-top:20px">
     <h4>Books</h4>
 
-    {% for book in author.book_set.all %}
-        <hr />
-        <p>
-            <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.bookinstance_set.all.count }})
-        </p>
-        <p>{{ book.summary }}</p>
-    {% endfor %}
+    {% if author.book_set.all %}
+        {% for book in author.book_set.all %}
+            <hr />
+            <p>
+                <a href="{{ book.get_absolute_url }}">{{ book.title }}</a> ({{ book.bookinstance_set.all.count }})
+            </p>
+            <p>{{ book.summary }}</p>
+        {% endfor %}
+    {% else %}
+        <p>{{ author }} has no books.</p>
+    {% endif %}
   </div>
 {% endblock %}
