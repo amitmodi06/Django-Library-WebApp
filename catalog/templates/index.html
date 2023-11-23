@@ -18,4 +18,8 @@
     <li><strong>Authors:</strong> {{ num_authors }}</li>
     <li><strong>Books with word <em>"The"</em> in the title (case insensitive):</strong> {{ num_books_with_letter_The }}</li>
   </ul>
+
+  <p>
+    You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.
+  </p>
 {% endblock %}
