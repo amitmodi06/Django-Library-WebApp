@@ -23,3 +23,7 @@ urlpatterns = [
     path('catalog/', include('catalog.urls')),
     path('', RedirectView.as_view(url='catalog/')) # if "" then redirect to "catalog/" and use that view
 ]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')), #URL for authentication
+]
