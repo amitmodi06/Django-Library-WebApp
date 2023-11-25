@@ -1,7 +1,10 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .models import Book, BookInstance, Author, Genre, Language
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 def index(request):
@@ -70,5 +73,20 @@ class LoanedBooksByUserListView(LoginRequiredMixin,generic.ListView):
         return (
             BookInstance.objects.filter(borrower=self.request.user)
             .filter(status__exact='o')
+            .order_by('due_back')
+        )
+
+
+class AllLoanedBooksListView(PermissionRequiredMixin, generic.ListView):
+    """Generic class-based view listing books on loan to all user.
+        Only visible to users with 'can_mark_returned' permission"""
+    permission_required = 'catalog.can_mark_returned'
+    model = BookInstance
+    template_name = 'catalog/bookinstance_list_all_borrowed.html'
+    paginate_by = 10
+
+    def get_queryset(self) -> QuerySet[Any]:
+        return (
+            BookInstance.objects.filter(status__exact='o')
             .order_by('due_back')
         )
